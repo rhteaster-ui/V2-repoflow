@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-brand: #7c3aed;
+  --color-brand-light: #a78bfa;
+  --color-bg-dark: #050509;
+  --color-card-bg: rgba(16, 16, 24, 0.72);
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-bg-dark text-zinc-200 font-sans antialiased;
+    background-image:
+      radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.08) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(124, 58, 237, 0.06) 0px, transparent 50%);
+  }
+}
+
+@layer components {
+  .app-card {
+    @apply bg-card-bg border border-white/[0.08] rounded-xl shadow-lg shadow-black/30;
+  }
+
+  .btn-modern {
+    @apply px-4 py-2 bg-white text-black rounded-lg font-semibold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2;
+  }
+
+  .input-modern {
+    @apply w-full bg-white/[0.04] border border-white/12 rounded-lg px-3 py-2.5 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/35;
+  }
+
+  .icon-btn {
+    @apply w-7 h-7 rounded-md bg-white/[0.05] border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white;
+  }
+
+  .link-item {
+    @apply text-xs text-zinc-300 border border-white/10 bg-white/[0.02] rounded-lg px-3 py-2 flex items-center justify-between hover:bg-white/[0.05];
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #23232d;
+  border-radius: 20px;
+}
