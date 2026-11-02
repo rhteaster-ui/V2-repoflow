@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight, BarChart3, Clock, Database, FileArchive, FolderGit2, PlusCircle, Sparkles, UploadCloud } from 'lucide-react';
+import { ArrowUpRight, BarChart3, Clock, Database, FileArchive, FolderGit2, Sparkles, UploadCloud } from 'lucide-react';
 import type { Project, ActivityLog } from '../lib/db';
 import type { UploadEntry } from '../types';
 import { bytesToReadable } from '../utils';
@@ -115,17 +115,26 @@ export default function Dashboard({
         </div>
 
         <div className="flex items-end gap-2.5 h-28 pt-2">
-          {activityData.map((item) => (
-            <div key={item.label} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end">
-              <div className="w-full rounded-lg bg-white/[0.03] border border-white/[0.05] h-20 flex items-end p-1">
-                <div
-                  className="w-full rounded-md bg-gradient-to-t from-brand via-violet-500 to-cyan-400 transition-all duration-300"
-                  style={{ height: `${Math.max(10, (item.count / maxActivity) * 100)}%` }}
-                />
+          {activityData.map((item) => {
+            const hasActivity = item.count > 0;
+            return (
+              <div key={item.label} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end">
+                <div className="w-full rounded-lg bg-white/[0.03] border border-white/[0.05] h-20 flex items-end p-1">
+                  {hasActivity ? (
+                    <div
+                      className="w-full rounded-md bg-gradient-to-t from-brand via-violet-500 to-cyan-400 transition-all duration-300"
+                      style={{ height: `${Math.max(15, (item.count / maxActivity) * 100)}%` }}
+                    />
+                  ) : (
+                    <div className="w-full h-1 rounded-full bg-white/[0.08]" />
+                  )}
+                </div>
+                <span className={`text-[10px] font-medium ${hasActivity ? 'text-zinc-300' : 'text-zinc-600'}`}>
+                  {item.label}
+                </span>
               </div>
-              <span className="text-[10px] font-medium text-zinc-500">{item.label}</span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
