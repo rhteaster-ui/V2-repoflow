@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { BarChart3, Home, Info, Upload } from 'lucide-react';
+import { FolderGit2, Home, Info, Upload } from 'lucide-react';
 import type { AppTab } from './types';
 
 // ─── Static asset paths ────────────────────────────────────────────────────────
@@ -23,8 +23,8 @@ export const SOCIAL_LINKS = [
 
 // ─── Bottom nav / sidebar items ────────────────────────────────────────────────
 export const NAV_ITEMS: { id: AppTab; label: string; icon: React.ReactNode }[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: React.createElement(Home,     { size: 16 }) },
-  { id: 'upload',    label: 'Upload',    icon: React.createElement(Upload,   { size: 16 }) },
-  { id: 'tools',     label: 'Tools',     icon: React.createElement(BarChart3, { size: 16 }) },
-  { id: 'info',      label: 'Info Web',  icon: React.createElement(Info,     { size: 16 }) },
+  { id: 'dashboard', label: 'Dashboard', icon: React.createElement(Home,       { size: 17 }) },
+  { id: 'upload',    label: 'Upload',    icon: React.createElement(Upload,     { size: 17 }) },
+  { id: 'tools',     label: 'Tools',     icon: React.createElement(FolderGit2, { size: 17 }) },
+  { id: 'info',      label: 'Info Web',  icon: React.createElement(Info,       { size: 17 }) },
 ];

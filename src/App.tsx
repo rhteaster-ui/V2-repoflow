@@ -632,6 +632,7 @@ export default function App() {
                     onSelectProject={(p) => { selectProject(p); setTab('tools'); }}
                     onDeleteProject={deleteProject}
                     onNavigateToTools={() => setTab('tools')}
+                    onNavigateToUpload={() => setTab('upload')}
                   />
                 )}
 
