@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Sparkles } from 'lucide-react';
+import { Github } from 'lucide-react';
 import type { AppTab } from '../types';
 import type { GitHubAccount } from '../lib/db';
 
@@ -21,7 +21,7 @@ export default function Header({ iconSrc, onIconError, tab, user }: Props) {
   const currentTab = TAB_LABELS[tab];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/[0.08] bg-zinc-950/80 backdrop-blur-xl px-4 py-3">
+    <header className="sticky top-0 z-40 border-b border-white/[0.08] bg-zinc-950/85 backdrop-blur-xl px-4 py-3">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         {/* Brand */}
         <div className="flex items-center gap-3">
@@ -32,12 +32,14 @@ export default function Header({ iconSrc, onIconError, tab, user }: Props) {
               className="w-9 h-9 rounded-xl border border-white/15 object-cover shadow-sm bg-black/40"
               onError={onIconError}
             />
-            <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-zinc-950" />
+            {user && (
+              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-zinc-950" />
+            )}
           </div>
           <div>
             <div className="flex items-center gap-1.5">
               <span className="text-[11px] font-bold tracking-wider uppercase text-brand-light font-mono">RepoFlow</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/[0.06] text-zinc-400 font-mono">v1.2</span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/[0.06] text-zinc-400 font-mono">v1.2</span>
             </div>
             <h1 className="text-sm text-white font-semibold leading-tight">{currentTab.title}</h1>
           </div>

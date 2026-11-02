@@ -35,7 +35,6 @@ export default function Welcome({ bannerSrc, iconSrc, onBannerError, onIconError
             className="w-full h-full rounded-xl object-cover"
             onError={onIconError}
           />
-          <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-zinc-950 flex items-center justify-center" />
         </div>
 
         <div className="space-y-1.5 pt-1">
