@@ -71,6 +71,7 @@ export default function App() {
   const [searchProject,    setSearchProject]    = useState('');
   const [copiedId,         setCopiedId]         = useState<number | null>(null);
   const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null);
+  const selectedProject   = projects.find((p) => p.id === selectedProjectId) ?? null;
   const [repoFiles,        setRepoFiles]        = useState<RepoFileEntry[]>([]);
   const [baseShas,         setBaseShas]         = useState<Record<string, string>>({});
   const [baseHeadSha,      setBaseHeadSha]      = useState('');
@@ -122,18 +123,6 @@ export default function App() {
     return () => clearTimeout(id);
   }, [repoName, user]);
 
-  // ── Background auto-sync in Tools ─────────────────────────────────────────
-  useEffect(() => {
-    if (tab !== 'tools' || !selectedProject || !user) return;
-    syncSelectedRepo(selectedProject, { silent: true, preserveDraft: true });
-    const id = window.setInterval(() => {
-      if (!stagedFiles.length && !deletedPaths.length) {
-        syncSelectedRepo(selectedProject, { silent: true, preserveDraft: true });
-      }
-    }, 30_000);
-    return () => window.clearInterval(id);
-  }, [tab, selectedProject, user, stagedFiles.length, deletedPaths.length]);
-
   // ── Derived / memoised values ───────────────────────────────────────────────
   const filteredProjects = useMemo(
     () => projects.filter((p) => p.repoName.toLowerCase().includes(searchProject.toLowerCase())),
@@ -150,7 +139,6 @@ export default function App() {
     [uploadEntries, uploadFilter],
   );
   const selectedTotalSize = selectedEntries.reduce((sum, e) => sum + e.size, 0);
-  const selectedProject   = projects.find((p) => p.id === selectedProjectId) ?? null;
 
   const repoFolders = useMemo(() => {
     const folders = new Set<string>();
@@ -401,6 +389,18 @@ export default function App() {
       setSyncingRepo(false); setBackgroundSyncing(false);
     }
   };
+
+  // ── Background auto-sync in Tools ─────────────────────────────────────────
+  useEffect(() => {
+    if (tab !== 'tools' || !selectedProject || !user) return;
+    syncSelectedRepo(selectedProject, { silent: true, preserveDraft: true });
+    const id = window.setInterval(() => {
+      if (!stagedFiles.length && !deletedPaths.length) {
+        syncSelectedRepo(selectedProject, { silent: true, preserveDraft: true });
+      }
+    }, 30_000);
+    return () => window.clearInterval(id);
+  }, [tab, selectedProject, user, stagedFiles.length, deletedPaths.length]);
 
   // ── Stage files for update ──────────────────────────────────────────────────
   const handleStageFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
